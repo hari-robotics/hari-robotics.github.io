@@ -5,7 +5,7 @@ description: '电机系统与FOC控制'
 image: ''
 tags: [电机, 控制]
 category: '电机'
-draft: true 
+draft: false 
 ---
 
 :::warning

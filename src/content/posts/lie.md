@@ -5,7 +5,7 @@ description: '机器人表示空间中旋转和位移的群和向量'
 image: ''
 tags: [机器人, 数学]
 category: '数学'
-draft: true 
+draft: false 
 ---
 
 ## 李群
