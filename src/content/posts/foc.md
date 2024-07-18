@@ -312,3 +312,69 @@ $$
 :::note
 本部分解耦控制与滑模观测器参考[基于滑模观测器的永磁同步电机电流偏差解耦控制](https://dgjsxb.ces-transaction.com/fileup/HTML/2020-8-1642.htm)
 :::
+
+### 力反馈实现
+我们设计完电流的闭环控制以后，可以将电流环路作为一个有一阶延迟的理想系统，通过改变电流可以实现更改电机的输出力矩，让我们回到电机的力矩与电流的方程：
+$$
+\begin{aligned}
+    T &= \frac32 N(i_q(i_d L_d + \Psi_m) - i_d i_q L_q) \\
+    &= \frac32 N(L_d - L_q)i_d i_q + \frac32 N\Psi_m i_q
+\end{aligned}
+$$
+
+让我们分两种情况分析，当$L_d = L_q$时，$i_d = 0$即可实现最大转矩电流比，此时有：
+$$
+    T = \frac32 N\Psi_m i_q
+$$
+
+转矩和q轴电流呈线性关系，即我们通过读取电机的电流可以估计电机的输出转矩。再根据机械转动平衡方程，可以得到以下公式：
+$$
+    T = J \dot{\omega} + B \omega + T_L + T_d
+$$
+
+其中$T_L$为负载转矩，$T_d$为未建模的干扰转矩。为了消除干扰转矩的影响，我们可以通过设计鲁棒速度控制器来对干扰转矩进行反向建模。
+
+首先，给出状态空间方程：
+$$
+\dot{\omega} = -\frac{B}{J} \omega + \frac{1}{J}(T - T_L - T_d)
+$$
+
+在电机空载时，$T_L = 0$，此时我们可以先忽略干扰项进行控制器设计：
+$$
+T = -K\omega
+$$
+
+使用LQR离线求解状态反馈矩阵$K$，定义滑模面$s = G\omega + z$，对滑模面求导得到趋近律：
+$$
+\dot{s} = G\dot{\omega} + \dot{z}
+$$
+
+配置滑模面和趋近律使其初始位置为0，于是有：
+$$
+\dot{z} = -G\dot{\omega} = -G(-\frac{B}{J}\omega  + \frac{1}{J}(T - T_d))
+$$
+
+由于$T_d$是未知项，这里使用近似法直接去除$T_d$项来保持$\dot{z}$全程已知。
+$$
+\dot{z} = -G\dot{\omega} \approx -G(-\frac{B}{J}\omega  + \frac{1}{J}T)
+$$
+
+将$\dot{z}$带入滑模面，可得：
+$$
+s = G\omega + \int_0^{\inf} (-G(-\frac{B}{J}\omega  + \frac{1}{J}T))dt + (-G\dot{\omega}_0)
+$$
+
+对于趋近律，有：
+$$
+\begin{aligned}
+    \dot{s} &= G\dot{\omega} - G(-\frac{B}{J}\omega  + \frac{1}{J}T) \\
+    &= \frac{G}{J}T_d
+\end{aligned}
+$$
+
+当$G = J$时，$\dot{s} = T_d$，为了消除该干扰项，我们可以修改控制率：
+$$
+T = -K\omega -\rho \frac{s}{|s| + 0.001}
+$$
+
+$\rho$为干扰上界，这里不再证明控制器的稳定性。控制电机保持低速旋转，通过读取输出力矩可以得到近似干扰力矩$T_d$，使用数值法对该干扰力矩进行建模并通过前馈补偿消除干扰力矩。
