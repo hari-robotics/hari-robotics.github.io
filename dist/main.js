@@ -84,8 +84,8 @@ const bundles = {
                     period: "2023 - 2024"
                 },
                 {
-                    school: "Politecnico di Milano (QS 98)",
-                    degree: "MSc in Automation and Control Engineering (QS 21)",
+                    school: "Politecnico di Milano",
+                    degree: "MSc in Automation and Control Engineering",
                     period: "2025 - 2027"
                 }
             ],
@@ -126,7 +126,7 @@ const bundles = {
             summary: "有机械结构设计，硬件设计，嵌入式系统与运控算法等相关开发经验。具备机器人系统的全栈开发能力，可实现从0搭建完整机器人系统的整套工作流程。项目经验丰富，具备较强的动手能力和问题解决能力。热衷于机器人相关技术的研究与应用。",
             contacts: [
                 { kind: "email", value: "zzh_robotic@163.com", href: "mailto:zzh_robotic@163.com" },
-                { kind: "location", value: "意大利，米兰，米兰" },
+                { kind: "location", value: "意大利，米兰" },
                 { kind: "github", value: "https://github.com/hari-robotics", href: "https://github.com/hari-robotics" }
             ],
             skills: [
