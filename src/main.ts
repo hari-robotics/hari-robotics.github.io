@@ -60,7 +60,7 @@ type LocaleBundle = {
   switcherAria: string;
 };
 
-const avatarPlaceholder = "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=";
+const avatarPlaceholder = "./asserts/image.jpeg";
 const localeStorageKey = "resume-locale";
 
 const bundles: Record<Locale, LocaleBundle> = {
@@ -391,7 +391,7 @@ function renderResume(bundle: LocaleBundle): HTMLElement {
   const avatar = document.createElement("img");
   avatar.className = "avatar";
   avatar.src = avatarPlaceholder;
-  avatar.alt = "Avatar placeholder";
+  avatar.alt = "Avatar";
   avatar.width = 110;
   avatar.height = 154;
 

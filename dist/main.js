@@ -1,5 +1,5 @@
 "use strict";
-const avatarPlaceholder = "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=";
+const avatarPlaceholder = "./asserts/image.jpeg";
 const localeStorageKey = "resume-locale";
 const bundles = {
     en: {
@@ -308,7 +308,7 @@ function renderResume(bundle) {
     const avatar = document.createElement("img");
     avatar.className = "avatar";
     avatar.src = avatarPlaceholder;
-    avatar.alt = "Avatar placeholder";
+    avatar.alt = "Avatar";
     avatar.width = 110;
     avatar.height = 154;
     const contactList = createElement("ul", { className: "contact" });

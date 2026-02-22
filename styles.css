@@ -50,13 +50,13 @@ body {
 .hero-aside {
   display: flex;
   justify-content: flex-end;
-  align-items: stretch;
+  align-items: flex-start;
 }
 
 .avatar {
-  width: auto;
-  height: 100%;
-  min-height: 154px;
+  width: clamp(128px, 16vw, 188px);
+  height: auto;
+  max-height: 264px;
   aspect-ratio: 5 / 7;
   border-radius: 22px;
   border: 1px solid #d4dbd8;
@@ -64,6 +64,7 @@ body {
     linear-gradient(160deg, #ffffff 0%, #f0f4f2 100%);
   box-shadow: 0 8px 18px rgba(30, 46, 40, 0.08);
   object-fit: cover;
+  object-position: center center;
 }
 
 .name {
