@@ -5,23 +5,72 @@ const bundles = {
     en: {
         resume: {
             name: "Zihao Zheng",
-            role: "MSc Student",
-            summary: "Experienced in mechanical structure design, hardware design, embedded systems, and motion-control algorithms. Capable of end-to-end robot system development and delivering complete workflows from scratch. Strong hands-on engineering skills and problem-solving ability, with a strong interest in robotics research and real-world applications.",
+            role: "Robotics Engineer | MSc Student",
+            summary: "Experienced in mechanical structure design, hardware design, embedded systems, and motion control algorithms. Capable of full-stack robotics development and able to build complete robot systems from scratch. Strong project experience, hands-on engineering ability, and problem-solving skills, with a strong interest in robotics research and applications.",
             contacts: [
-                { kind: "email", value: "zzh_robotic@163.com", href: "mailto:zzh_robotic@163.com" },
+                { kind: "email", value: "zzh211106370@gmail.com", href: "mailto:zzh211106370@gmail.com" },
                 { kind: "location", value: "Milan, Italy" },
-                { kind: "github", value: "github.com/hari-robotics", href: "https://github.com/hari-robotics" }
+                { kind: "github", value: "https://github.com/hari-robotics", href: "https://github.com/hari-robotics" }
             ],
             skills: [
-                "C/C++",
-                "ROS",
-                "ROS 2",
-                "Python",
-                "MATLAB",
-                "Control System Design",
-                "UAV Structural Design",
-                "Motion Planning Algorithms",
-                "Embedded System Development"
+                {
+                    name: "C/C++",
+                    level: "Proficient",
+                    core: true,
+                    capabilities: [
+                        "Able to implement reusable robotics algorithm modules with Modern C++, with solid code organization and documentation practices.",
+                        "Familiar with common threading, synchronization, and performance optimization methods, and able to make reasonable design choices for real-time robotics systems."
+                    ]
+                },
+                {
+                    name: "ROS / ROS 2",
+                    level: "Proficient",
+                    core: true,
+                    capabilities: [
+                        "Familiar with ROS interfaces and communication patterns, and able to design appropriate software architectures for robotic functions independently.",
+                        "Hands-on experience with various open-source ROS packages such as Fast-LIO2 and DDR-opt, and able to build systems quickly on top of existing components and extend them further.",
+                        "Familiar with simulation tools in ROS environments such as Gazebo, RViz, and MuJoCo for algorithm validation and system debugging."
+                    ]
+                },
+                {
+                    name: "Motion Control & Planning",
+                    level: "Proficient",
+                    core: true,
+                    capabilities: [
+                        "Able to derive kinematic and dynamic models of robotic systems and design related control algorithms.",
+                        "Able to design experiments for parameter identification and validate algorithm performance in both simulation and real hardware.",
+                        "Familiar with multiple controller models and design methods such as PID, LQR, and MPC, and able to choose and design suitable controllers for different robotic systems and task requirements."
+                    ]
+                },
+                {
+                    name: "Embedded Systems",
+                    level: "Proficient",
+                    core: true,
+                    capabilities: [
+                        "Able to design MCU peripheral circuits based on requirements and implement related functionality in firmware.",
+                        "Familiar with common bus protocols such as SPI, I2C, UART, and CAN, and able to implement drivers and communication for sensors and actuators.",
+                        "Experience with RTOS and able to design real-time task scheduling and resource management schemes.",
+                        "Familiar with ARM Cortex-M microcontroller architecture, compilation principles, and linking processes, with the ability to perform optimization and troubleshooting."
+                    ]
+                },
+                {
+                    name: "MATLAB / Simulink",
+                    level: "Proficient",
+                    capabilities: [
+                        "Able to perform rapid algorithm prototyping and simulation validation.",
+                        "Able to use ROS interface tools for fast algorithm deployment and testing.",
+                        "Able to visualize experimental data and analyze control performance and system behavior."
+                    ]
+                },
+                {
+                    name: "CAD Tools such as SolidWorks",
+                    level: "Regularly Used",
+                    capabilities: [
+                        "Familiar with mechanical structure design and modeling, with experience designing multiple robotic platforms.",
+                        "Able to identify robot mass, inertia, and related parameters with CAD tools to support controller design.",
+                        "Hands-on experience with machining and 3D printing, and able to turn designs into manufacturable parts."
+                    ]
+                }
             ],
             experiences: [
                 {
@@ -29,9 +78,8 @@ const bundles = {
                     company: "Nanjing University",
                     period: "Jul 2025 - Sep 2025",
                     highlights: [
-                        "Designed two unconventional UAV structures and built flight-control system prototypes, achieving autonomous takeoff/landing and fixed-point hovering.",
-                        "Contributed to UAV motion-planning algorithm development based on NMPC and implemented waypoint tracking control.",
-                        "Assisted with experimental data analysis, paper video production, and participated in paper review.",
+                        "Designed two unconventional UAV structures, derived their dynamic models, and modified the NMPC algorithm to achieve autonomous takeoff, landing, and fixed-point hovering.",
+                        "Assisted with experimental data analysis, paper video production, and paper review.",
                         "Related results were published at the IEEE International Conference on Robotics and Automation (ICRA 2026)."
                     ]
                 },
@@ -58,24 +106,44 @@ const bundles = {
             projects: [
                 {
                     name: "Design and Control of a Fully-Actuated UAV",
-                    description: "PhD research topic. Designed and implemented a prototype fully-actuated UAV system and validated controller feasibility in simulation.",
-                    stack: "ROS, C/C++, UAV Dynamics and Control Algorithm Design"
+                    highlights: [
+                        "PhD research topic focused on the design and control of a fully-actuated UAV system.",
+                        "Designed a fully-actuated UAV system and derived its dynamic model.",
+                        "Designed an optimal control allocation algorithm and validated the feasibility of the control method in simulation."
+                    ],
+                    stack: "ROS, C/C++, Motion Control and Planning"
                 },
                 {
                     name: "Challenge Cup National Undergraduate Extracurricular Academic and Science Competition",
-                    description: "Won Provincial Second Prize for a ROS-based distributed control solution and interface standardization.",
-                    stack: "ROS, C/C++, Motor Control, Embedded Systems"
+                    highlights: [
+                        "Designed and implemented a ROS-based distributed control solution capable of real-time control on physical systems from MATLAB.",
+                        "Verified algorithms in MATLAB and then exported them as ROS packages for higher runtime efficiency and rapid deployment.",
+                        "Won Provincial Second Prize in the competition."
+                    ],
+                    stack: "ROS, C/C++, MATLAB/Simulink, ROS/ROS 2"
                 },
                 {
                     name: "RoboMaster Robotics Competition",
-                    description: "Won multiple Third Prizes in individual events and confrontation events.",
+                    highlights: [
+                        "Participated in multiple individual and confrontation events, responsible for control and embedded-related modules.",
+                        "Developed STM32 microcontroller firmware based on FreeRTOS and the HAL library to implement low-level motion control.",
+                        "Implemented communication between non-ROS lower-level controllers and a ROS upper computer through the ROS messaging mechanism, enabling reception of high-level control commands."
+                    ],
+                    stack: "ROS, C/C++, Embedded Systems"
+                },
+                {
+                    name: "System Identification of a Soft-body UAV",
+                    highlights: [
+                        "Undergraduate final-year project using least-squares-based system identification.",
+                        "Designed a PID controller based on the identified model and validated it through simulation and real-world testing."
+                    ],
                     stack: "ROS, C/C++, Embedded Systems"
                 }
             ],
             education: [
                 {
                     school: "University of Nottingham Ningbo China",
-                    degree: "BEng in Electrical and Electronic Engineering",
+                    degree: "BEng in Electrical Engineering and Automation",
                     period: "2019 - 2023"
                 },
                 {
@@ -106,7 +174,7 @@ const bundles = {
         headings: {
             experience: "Experience",
             projects: "Projects",
-            skills: "Skills",
+            skills: "Tech Stack",
             education: "Education",
             publication: "Publications"
         },
@@ -117,12 +185,13 @@ const bundles = {
             website: "Website",
             github: "GitHub"
         },
+        coreSkillLabel: "Core",
         switcherAria: "Switch language"
     },
     zh: {
         resume: {
             name: "郑子豪",
-            role: "在读硕士",
+            role: "机器人工程师｜在读硕士",
             summary: "有机械结构设计，硬件设计，嵌入式系统与运控算法等相关开发经验。具备机器人系统的全栈开发能力，可实现从0搭建完整机器人系统的整套工作流程。项目经验丰富，具备较强的动手能力和问题解决能力。热衷于机器人相关技术的研究与应用。",
             contacts: [
                 { kind: "email", value: "zzh_robotic@163.com", href: "mailto:zzh_robotic@163.com" },
@@ -130,15 +199,64 @@ const bundles = {
                 { kind: "github", value: "https://github.com/hari-robotics", href: "https://github.com/hari-robotics" }
             ],
             skills: [
-                "C/C++",
-                "ROS",
-                "ROS 2",
-                "Python",
-                "Matlab",
-                "控制系统设计",
-                "无人机结构设计",
-                "运动规划算法",
-                "嵌入式系统开发"
+                {
+                    name: "C/C++",
+                    level: "熟练",
+                    core: true,
+                    capabilities: [
+                        "能使用Modern C++实现可复用的机器人算法模块，并具备良好的代码组织与文档习惯",
+                        "了解常用的线程同步与性能优化方法，能针对机器人系统的实时性需求进行合理设计",
+                    ]
+                },
+                {
+                    name: "ROS / ROS 2",
+                    level: "熟练",
+                    core: true,
+                    capabilities: [
+                        "了解ROS中各种接口与通信方式，能自主设计合适的代码架构实现机器人各类功能",
+                        "使用过多种开源ROS包组件（如Fast-LIO2，DDR-opt等），能基于已有组件快速搭建系统并进行二次开发",
+                        "熟悉ROS环境下的各种仿真工具（如Gazebo，Rviz，mujoco等），能搭建仿真环境进行算法验证与系统调试"
+                    ]
+                },
+                {
+                    name: "运动控制与规划",
+                    level: "熟练",
+                    core: true,
+                    capabilities: [
+                        "能够推导机器人的运动学与动力学模型，设计相关控制算法",
+                        "能够设计实验对位置参数进行辨识，并通过仿真与实物验证算法的性能",
+                        "了解多种控制器模型与设计方法（如PID，LQR，MPC等），能针对不同的机器人系统与任务需求进行合理选择与设计"
+                    ]
+                },
+                {
+                    name: "嵌入式系统",
+                    level: "熟练",
+                    core: true,
+                    capabilities: [
+                        "可根据需求设计MCU外围电路并编写固件实现相关功能",
+                        "了解基础总线协议（如SPI、I2C、UART、CAN等），能实现各种传感器与执行器的驱动与通信",
+                        "有RTOS使用经验，能够设计实时任务调度与资源管理方案",
+                        "了解ARM Cortex-M系列微控制器架构，了解编译原理与链接过程，能够进行性能优化与故障排查"
+                    ]
+                },
+                {
+                    name: "Matlab / Simulink",
+                    level: "熟练",
+                    capabilities: [
+                        "可进行快速的算法原型设计与仿真验证",
+                        "能够使用ROS接口工具进行快速算法部署与测试",
+                        "能够将实验数据可视化并分析控制性能与系统行为"
+                    ]
+                },
+                {
+                    name: "SolidWorks等CAD软件",
+                    level: "常用",
+                    capabilities: [
+                        "了解机械结构设计与建模，设计过多个机器人平台。",
+                        "能够通过CAD软件标定机器人质量、惯量等参数，辅助控制器设计。",
+                        "有机加工，3D打印等经验，能够将设计转换为可制造的零件。"
+                    ]
+                }
             ],
             experiences: [
                 {
@@ -146,8 +264,7 @@ const bundles = {
                     company: "南京大学",
                     period: "2025.7 - 2025.9",
                     highlights: [
-                        "设计两款异形无人机结构，并搭建飞行控制系统原型，成功实现自主起降与定点悬停。",
-                        "辅助完成基于NMPC的无人机运动规划算法开发，实现路径点的跟踪控制。",
+                        "设计两款异形无人机结构，并推导其动力学模型修改NMPC算法，成功实现自主起降与定点悬停。",
                         "辅助实验数据的分析与论文视频的制作，并参与论文的review",
                         "相关成果发表于 2026 年国际机器人与自动化会议（ICRA 2026）。"
                     ]
@@ -175,17 +292,36 @@ const bundles = {
             projects: [
                 {
                     name: "全自由度无人机的设计与控制",
-                    description: "博士课题，设计并实现了一款全自由度无人机的原型系统，在仿真中验证了控制算法的可行性。",
-                    stack: "ROS, C/C++, 无人机动力学与控制算法设计"
+                    highlights: [
+                        "博士课题方向，设计了一款全自由度无人机系统，并推导其动力学模型",
+                        "设计了最优控制分配算法并在仿真中验证了控制算法的可行性。"
+                    ],
+                    stack: "ROS, C/C++, 运动控制与规划"
                 },
                 {
                     name: "挑战杯全国大学生课外学术科技作品竞赛",
-                    description: "基于ROS的分布式控制方案与接口标准化获得省级二等奖",
-                    stack: "ROS, C/C++, 电机控制， 嵌入式系统"
+                    highlights: [
+                        "设计并实现基于 ROS 的分布式控制方案，可在MATLAB中实现实时实机控制。",
+                        "可在MATLAB中验证实机算法后导出ROS包，提高运行效率并进行快速部署。",
+                        "项目获得省级二等奖。"
+                    ],
+                    stack: "ROS, C/C++, MATLAB/Simulink， ROS/ROS2"
                 },
                 {
                     name: "RoboMaster机甲大师赛",
-                    description: "多个单项赛与对抗赛三等奖",
+                    highlights: [
+                        "参与多个单项赛与对抗赛任务，负责控制与嵌入式相关模块。",
+                        "基于FreeRTOS与HAL库开发STM32微控制器固件，实现机器人运动的底层控制。",
+                        "基于ROS消息机制实现下位机无需集成ROS系统便可与ROS上位机通信的功能，以便接收上位机控制指令。"
+                    ],
+                    stack: "ROS, C/C++，嵌入式系统"
+                },
+                {
+                    name: "软体无人机的系统辨识",
+                    highlights: [
+                        "本科毕业设计，使用最小二乘法进行系统辨识。",
+                        "基于辨识结果设计了PID控制器，并进行了仿真验证与实机测试。",
+                    ],
                     stack: "ROS, C/C++，嵌入式系统"
                 }
             ],
@@ -223,7 +359,7 @@ const bundles = {
         headings: {
             experience: "工作经历",
             projects: "项目经历",
-            skills: "技能",
+            skills: "技术栈",
             education: "教育背景",
             publication: "成果"
         },
@@ -234,6 +370,7 @@ const bundles = {
             website: "网站",
             github: "GitHub"
         },
+        coreSkillLabel: "核心",
         switcherAria: "切换语言"
     }
 };
@@ -299,7 +436,7 @@ function getContactIconClass(kind) {
     }
 }
 function renderResume(bundle) {
-    const { resume, headings, contactNames } = bundle;
+    const { resume, headings, contactNames, coreSkillLabel } = bundle;
     const shell = createElement("main", { className: "resume-shell" });
     const hero = createElement("section", { className: "hero" });
     const heroMain = createElement("div", { className: "hero-main" });
@@ -330,13 +467,10 @@ function renderResume(bundle) {
         item.append(content);
         contactList.append(item);
     }
-    const contactStrip = createElement("section", { className: "contact-strip" });
-    contactStrip.append(contactList);
+    heroMain.append(contactList);
     heroAside.append(avatar);
     hero.append(heroMain, heroAside);
     const grid = createElement("section", { className: "grid" });
-    const left = createElement("div");
-    const right = createElement("aside");
     const experienceSection = createElement("section", { className: "section" });
     experienceSection.append(createElement("h2", { text: headings.experience }));
     const timeline = createElement("div", { className: "timeline" });
@@ -365,18 +499,35 @@ function renderResume(bundle) {
                 rel: "noopener noreferrer"
             })
             : createElement("strong", { text: project.name });
-        item.append(title, createElement("p", { text: project.description }), createElement("p", { className: "meta", text: project.stack }));
+        const highlights = createElement("ul", { className: "project-highlights" });
+        for (const highlight of project.highlights) {
+            highlights.append(createElement("li", { text: highlight }));
+        }
+        item.append(title, highlights, createElement("p", { className: "meta", text: project.stack }));
         projects.append(item);
     }
     projectsSection.append(projects);
-    left.append(experienceSection, projectsSection);
     const skillsSection = createElement("section", { className: "section" });
     skillsSection.append(createElement("h2", { text: headings.skills }));
-    const tags = createElement("div", { className: "tags" });
+    const stackList = createElement("div", { className: "stack-list" });
     for (const skill of resume.skills) {
-        tags.append(createElement("span", { className: "tag", text: skill }));
+        const card = createElement("article", { className: "stack-card" });
+        const head = createElement("div", { className: "stack-head" });
+        const name = createElement("h3", { className: "stack-name", text: skill.name });
+        const badges = createElement("div", { className: "stack-badges" });
+        if (skill.core) {
+            badges.append(createElement("span", { className: "stack-core", text: coreSkillLabel }));
+        }
+        badges.append(createElement("span", { className: "stack-level", text: skill.level }));
+        head.append(name, badges);
+        const capabilities = createElement("ul", { className: "stack-capabilities" });
+        for (const capability of skill.capabilities) {
+            capabilities.append(createElement("li", { text: capability }));
+        }
+        card.append(head, capabilities);
+        stackList.append(card);
     }
-    skillsSection.append(tags);
+    skillsSection.append(stackList);
     const eduSection = createElement("section", { className: "section" });
     eduSection.append(createElement("h2", { text: headings.education }));
     for (const edu of resume.education) {
@@ -402,9 +553,8 @@ function renderResume(bundle) {
         publicationList.append(line);
     }
     publicationSection.append(publicationList);
-    right.append(skillsSection, eduSection, publicationSection);
-    grid.append(left, right);
-    shell.append(hero, contactStrip, grid);
+    grid.append(skillsSection, experienceSection, projectsSection, eduSection, publicationSection);
+    shell.append(hero, grid);
     return shell;
 }
 function createLanguageSwitcher(getLocale, onLocaleChange) {
