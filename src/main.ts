@@ -146,7 +146,7 @@ const bundles: Record<Locale, LocaleBundle> = {
           highlights: [
             "Designed two unconventional UAV structures, derived their dynamic models, and modified the NMPC algorithm to achieve autonomous takeoff, landing, and fixed-point hovering.",
             "Assisted with experimental data analysis, paper video production, and paper review.",
-            "Related results were published at the IEEE International Conference on Robotics and Automation (ICRA 2026)."
+            "Related results were submitted to the IEEE International Conference on Robotics and Automation (ICRA 2026)."
           ]
         },
         {
