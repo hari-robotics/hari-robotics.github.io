@@ -17,7 +17,8 @@ const bundles = {
             contacts: [
                 { kind: "email", value: "zzh_robotic@163.com", href: "mailto:zzh_robotic@163.com" },
                 { kind: "location", value: "Milan, Italy" },
-                { kind: "github", value: "https://github.com/hari-robotics", href: "https://github.com/hari-robotics" }
+                { kind: "github", value: "https://github.com/hari-robotics", href: "https://github.com/hari-robotics" },
+                { kind: "zhihu", value: "https://www.zhihu.com/people/hariRobotics/posts", href: "https://www.zhihu.com/people/hariRobotics/posts" }
             ],
             skills: [
                 {
@@ -90,7 +91,7 @@ const bundles = {
             ],
             projects: [
                 {
-                    name: "Design and Control of a Omnidirectional UAV",
+                    name: "Design and Control of an Omnidirectional UAV",
                     highlights: [
                         "Designed and built a omnidirectional UAV prototype, and derived its dynamic model.",
                         "Designed an optimal control allocation algorithm and validated the feasibility of the control algorithm in simulation."
@@ -111,7 +112,7 @@ const bundles = {
                     highlights: [
                         "Participated in multiple RMUC and RMUL events, responsible for control and embedded-related modules.",
                         "Developed STM32 microcontroller firmware based on FreeRTOS and the HAL library to implement low-level motion control.",
-                        "Implemented communication interface between lower-level controllers and PC through ROS messages without introducing entire ROS into embedded systems, improved the developing efficiency."
+                        "Implemented communication interface between lower-level controllers and PC through ROS messages without introducing entire ROS into embedded systems, improved the development efficiency."
                     ],
                     stack: "Robotics Programming & Tools, Embedded Software & Hardware"
                 },
@@ -154,7 +155,8 @@ const bundles = {
             phone: "Phone",
             location: "Location",
             website: "Website",
-            github: "GitHub"
+            github: "GitHub",
+            zhihu: "Zhihu"
         },
         coreSkillLabel: "Core",
         downloadPdfLabel: "Download PDF",
@@ -170,7 +172,8 @@ const bundles = {
             contacts: [
                 { kind: "email", value: "zzh_robotic@163.com", href: "mailto:zzh_robotic@163.com" },
                 { kind: "location", value: "意大利，米兰" },
-                { kind: "github", value: "https://github.com/hari-robotics", href: "https://github.com/hari-robotics" }
+                { kind: "github", value: "https://github.com/hari-robotics", href: "https://github.com/hari-robotics" },
+                { kind: "zhihu", value: "https://www.zhihu.com/people/hariRobotics/posts", href: "https://www.zhihu.com/people/hariRobotics/posts" }
             ],
             skills: [
                 {
@@ -308,7 +311,8 @@ const bundles = {
             phone: "电话",
             location: "地点",
             website: "网站",
-            github: "GitHub"
+            github: "GitHub",
+            zhihu: "知乎"
         },
         coreSkillLabel: "核心",
         downloadPdfLabel: "下载 PDF",
@@ -381,6 +385,22 @@ function resolveSiteRelativeHref(relativePath) {
     }
     return new URL(normalizedPath, currentUrl.href).href;
 }
+function getDisplayValue(contact) {
+    if (contact.href?.startsWith("mailto:")) {
+        return contact.value;
+    }
+    if (contact.href?.startsWith("http://") || contact.href?.startsWith("https://")) {
+        try {
+            const url = new URL(contact.href);
+            const compactPath = url.pathname.replace(/\/$/, "");
+            return `${url.hostname}${compactPath}`;
+        }
+        catch {
+            return contact.value.replace(/^https?:\/\//, "").replace(/\/$/, "");
+        }
+    }
+    return contact.value;
+}
 async function triggerFileDownload(fileUrl, downloadName) {
     const response = await fetch(fileUrl, { cache: "no-store" });
     if (!response.ok) {
@@ -410,6 +430,8 @@ function getContactIconClass(kind) {
             return "fa-solid fa-globe";
         case "github":
             return "fa-brands fa-github";
+        case "zhihu":
+            return "fa-brands fa-zhihu";
         default:
             return "fa-solid fa-circle-info";
     }
@@ -452,6 +474,7 @@ function renderResume(bundle) {
     const contactList = createElement("ul", { className: "contact" });
     for (const contact of resume.contacts) {
         const item = createElement("li");
+        const displayValue = getDisplayValue(contact);
         const content = contact.href
             ? createElement("a", {
                 href: contact.href,
@@ -463,7 +486,7 @@ function renderResume(bundle) {
         content.setAttribute("aria-label", `${contactNames[contact.kind]}: ${contact.value}`);
         const icon = createElement("i", { className: `contact-icon ${getContactIconClass(contact.kind)}` });
         icon.setAttribute("aria-hidden", "true");
-        const text = createElement("span", { text: contact.value });
+        const text = createElement("span", { text: displayValue });
         content.append(icon, text);
         item.append(content);
         contactList.append(item);

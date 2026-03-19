@@ -1,6 +1,6 @@
 type Locale = "en" | "zh";
 
-type ContactKind = "email" | "phone" | "location" | "website" | "github";
+type ContactKind = "email" | "phone" | "location" | "website" | "github" | "zhihu";
 
 type Contact = {
   kind: ContactKind;
@@ -97,7 +97,8 @@ const bundles: Record<Locale, LocaleBundle> = {
       contacts: [
         { kind: "email", value: "zzh_robotic@163.com", href: "mailto:zzh_robotic@163.com" },
         { kind: "location", value: "Milan, Italy" },
-        { kind: "github", value: "https://github.com/hari-robotics", href: "https://github.com/hari-robotics" }
+        { kind: "github", value: "https://github.com/hari-robotics", href: "https://github.com/hari-robotics" },
+        { kind: "zhihu", value: "https://www.zhihu.com/people/hariRobotics/posts", href: "https://www.zhihu.com/people/hariRobotics/posts" }
       ],
       skills: [
         {
@@ -235,6 +236,8 @@ const bundles: Record<Locale, LocaleBundle> = {
       location: "Location",
       website: "Website",
       github: "GitHub"
+      ,
+      zhihu: "Zhihu"
     },
     coreSkillLabel: "Core",
     downloadPdfLabel: "Download PDF",
@@ -251,7 +254,8 @@ const bundles: Record<Locale, LocaleBundle> = {
       contacts: [
         { kind: "email", value: "zzh_robotic@163.com", href: "mailto:zzh_robotic@163.com" },
         { kind: "location", value: "意大利，米兰" },
-        { kind: "github", value: "https://github.com/hari-robotics", href: "https://github.com/hari-robotics" }
+        { kind: "github", value: "https://github.com/hari-robotics", href: "https://github.com/hari-robotics" },
+        { kind: "zhihu", value: "https://www.zhihu.com/people/hariRobotics/posts", href: "https://www.zhihu.com/people/hariRobotics/posts" }
       ],
       skills: [
         {
@@ -390,6 +394,8 @@ const bundles: Record<Locale, LocaleBundle> = {
       location: "地点",
       website: "网站",
       github: "GitHub"
+      ,
+      zhihu: "知乎"
     },
     coreSkillLabel: "核心",
     downloadPdfLabel: "下载 PDF",
@@ -478,6 +484,24 @@ function resolveSiteRelativeHref(relativePath: string): string {
   return new URL(normalizedPath, currentUrl.href).href;
 }
 
+function getDisplayValue(contact: Contact): string {
+  if (contact.href?.startsWith("mailto:")) {
+    return contact.value;
+  }
+
+  if (contact.href?.startsWith("http://") || contact.href?.startsWith("https://")) {
+    try {
+      const url = new URL(contact.href);
+      const compactPath = url.pathname.replace(/\/$/, "");
+      return `${url.hostname}${compactPath}`;
+    } catch {
+      return contact.value.replace(/^https?:\/\//, "").replace(/\/$/, "");
+    }
+  }
+
+  return contact.value;
+}
+
 async function triggerFileDownload(fileUrl: string, downloadName: string): Promise<void> {
   const response = await fetch(fileUrl, { cache: "no-store" });
   if (!response.ok) {
@@ -510,6 +534,8 @@ function getContactIconClass(kind: ContactKind): string {
       return "fa-solid fa-globe";
     case "github":
       return "fa-brands fa-github";
+    case "zhihu":
+      return "fa-brands fa-zhihu";
     default:
       return "fa-solid fa-circle-info";
   }
@@ -560,6 +586,7 @@ function renderResume(bundle: LocaleBundle): HTMLElement {
   const contactList = createElement("ul", { className: "contact" });
   for (const contact of resume.contacts) {
     const item = createElement("li");
+    const displayValue = getDisplayValue(contact);
     const content = contact.href
       ? createElement("a", {
           href: contact.href,
@@ -574,7 +601,7 @@ function renderResume(bundle: LocaleBundle): HTMLElement {
     const icon = createElement("i", { className: `contact-icon ${getContactIconClass(contact.kind)}` });
     icon.setAttribute("aria-hidden", "true");
 
-    const text = createElement("span", { text: contact.value });
+    const text = createElement("span", { text: displayValue });
     content.append(icon, text);
 
     item.append(content);
