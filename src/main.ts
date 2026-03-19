@@ -478,6 +478,26 @@ function resolveSiteRelativeHref(relativePath: string): string {
   return new URL(normalizedPath, currentUrl.href).href;
 }
 
+async function triggerFileDownload(fileUrl: string, downloadName: string): Promise<void> {
+  const response = await fetch(fileUrl, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error(`Download request failed with HTTP ${response.status}.`);
+  }
+
+  const blob = await response.blob();
+  const blobUrl = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = blobUrl;
+  link.download = downloadName;
+  document.body.append(link);
+  link.click();
+  link.remove();
+
+  window.setTimeout(() => {
+    URL.revokeObjectURL(blobUrl);
+  }, 0);
+}
+
 function getContactIconClass(kind: ContactKind): string {
   switch (kind) {
     case "email":
@@ -499,12 +519,23 @@ function renderResume(bundle: LocaleBundle): HTMLElement {
   const { resume, headings, contactNames, coreSkillLabel, downloadPdfLabel, downloadPdfHref, downloadPdfName } = bundle;
   const shell = createElement("main", { className: "resume-shell" });
   const actions = createElement("div", { className: "resume-actions" });
+  const resolvedDownloadHref = resolveSiteRelativeHref(downloadPdfHref);
   const downloadLink = createElement("a", {
     className: "download-link",
-    href: resolveSiteRelativeHref(downloadPdfHref)
+    href: resolvedDownloadHref
   });
   downloadLink.setAttribute("download", downloadPdfName);
   downloadLink.setAttribute("aria-label", downloadPdfLabel);
+  downloadLink.addEventListener("click", async (event) => {
+    event.preventDefault();
+
+    try {
+      await triggerFileDownload(resolvedDownloadHref, downloadPdfName);
+    } catch (error) {
+      console.error("PDF download failed, navigating to the PDF file instead.", error);
+      window.location.assign(resolvedDownloadHref);
+    }
+  });
   const downloadIcon = createElement("i", { className: "fa-solid fa-file-arrow-down" });
   downloadIcon.setAttribute("aria-hidden", "true");
   downloadLink.append(downloadIcon, createElement("span", { text: downloadPdfLabel }));
