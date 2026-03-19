@@ -30,19 +30,27 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build TypeScript
+      - name: Build site and PDFs
         run: npm run build
+
+      - name: Verify generated PDFs
+        run: |
+          test -f resume-en-a4.pdf
+          test -f resume-zh-a4.pdf
 
       - name: Prepare Pages artifact
         run: |
           rm -rf _site
           mkdir -p _site
           cp index.html styles.css _site/
-          cp resume-*.pdf _site/ 2>/dev/null || true
+          cp resume-en-a4.pdf resume-zh-a4.pdf _site/
           cp -R dist _site/
           if [ -d asserts ]; then
             cp -R asserts _site/
           fi
+
+      - name: Inspect Pages artifact
+        run: find _site -maxdepth 2 -type f | sort
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
