@@ -170,7 +170,7 @@ const bundles: Record<Locale, LocaleBundle> = {
       ],
       projects: [
         {
-          name: "Design and Control of a Omnidirectional UAV",
+          name: "Design and Control of an Omnidirectional UAV",
           highlights: [
             "Designed and built a omnidirectional UAV prototype, and derived its dynamic model.",
             "Designed an optimal control allocation algorithm and validated the feasibility of the control algorithm in simulation."
@@ -191,7 +191,7 @@ const bundles: Record<Locale, LocaleBundle> = {
           highlights: [
             "Participated in multiple RMUC and RMUL events, responsible for control and embedded-related modules.",
             "Developed STM32 microcontroller firmware based on FreeRTOS and the HAL library to implement low-level motion control.",
-            "Implemented communication interface between lower-level controllers and PC through ROS messages without introducing entire ROS into embedded systems, improved the developing efficiency."
+            "Implemented communication interface between lower-level controllers and PC through ROS messages without introducing entire ROS into embedded systems, improved the development efficiency."
           ],
           stack: "Robotics Programming & Tools, Embedded Software & Hardware"
         },
