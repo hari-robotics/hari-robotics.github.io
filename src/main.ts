@@ -87,6 +87,11 @@ function isPrintMode(): boolean {
   return new URLSearchParams(window.location.search).get("print") === "1";
 }
 
+function getWatermarkText(): string | null {
+  const watermark = new URLSearchParams(window.location.search).get("watermark");
+  return watermark ? watermark.trim().toUpperCase() : null;
+}
+
 const bundles: Record<Locale, LocaleBundle> = {
   en: {
     resume: {
@@ -146,7 +151,7 @@ const bundles: Record<Locale, LocaleBundle> = {
           highlights: [
             "Designed two unconventional UAV structures, derived their dynamic models, and modified the NMPC algorithm to achieve autonomous takeoff, landing, and fixed-point hovering.",
             "Assisted with experimental data analysis, paper video production, and paper review.",
-            "Related results were submitted to the IEEE International Conference on Robotics and Automation (ICRA 2026)."
+            "Related results were accepted at the IEEE International Conference on Robotics and Automation (ICRA 2026)."
           ]
         },
         {
@@ -173,7 +178,7 @@ const bundles: Record<Locale, LocaleBundle> = {
         {
           name: "Design and Control of an Omnidirectional UAV",
           highlights: [
-            "Designed and built a omnidirectional UAV prototype, and derived its dynamic model.",
+            "Designed and built an omnidirectional UAV prototype, and derived its dynamic model.",
             "Designed an optimal control allocation algorithm and validated the feasibility of the control algorithm in simulation."
           ],
           stack: "Robotics Programming & Tools, Control & Simulation"
@@ -721,6 +726,21 @@ function renderResume(bundle: LocaleBundle): HTMLElement {
   return shell;
 }
 
+function createWatermarkLayer(text: string): HTMLElement {
+  const layer = createElement("div", { className: "watermark-layer" });
+  const marks = [
+    "watermark-stamp watermark-top-left",
+    "watermark-stamp watermark-center",
+    "watermark-stamp watermark-bottom-right"
+  ];
+
+  for (const className of marks) {
+    layer.append(createElement("span", { className, text }));
+  }
+
+  return layer;
+}
+
 function createLanguageSwitcher(
   getLocale: () => Locale,
   onLocaleChange: (locale: Locale) => void
@@ -796,11 +816,20 @@ const app = document.querySelector<HTMLDivElement>("#app");
 if (app) {
   let currentLocale = getInitialLocale();
   const printMode = isPrintMode();
+  const watermarkText = getWatermarkText();
   document.body.classList.toggle("print-mode", printMode);
+  document.body.classList.toggle("pdf-watermark", Boolean(printMode && watermarkText));
 
   const renderApp = (): void => {
     const activeBundle = bundles[currentLocale];
+    const existingWatermark = document.querySelector(".watermark-layer");
+    if (existingWatermark) {
+      existingWatermark.remove();
+    }
     app.replaceChildren(renderResume(activeBundle));
+    if (printMode && watermarkText) {
+      document.body.append(createWatermarkLayer(watermarkText));
+    }
     document.documentElement.lang = currentLocale === "zh" ? "zh-CN" : "en";
     const switchButton = document.querySelector<HTMLButtonElement>(".lang-fab");
     if (switchButton) {

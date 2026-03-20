@@ -168,7 +168,7 @@ async function waitForPageLoad(client) {
 
 async function exportPdf(locale, outputName) {
   const outputPath = path.join(projectRoot, outputName);
-  const entryUrl = `${entryFileUrl}?lang=${locale}&print=1`;
+  const entryUrl = `${entryFileUrl}?lang=${locale}&print=1&watermark=preview`;
 
   mkdirSync(path.dirname(outputPath), { recursive: true });
 

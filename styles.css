@@ -488,6 +488,44 @@ a.link {
 }
 
 @media print {
+  body.pdf-watermark .watermark-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  body.pdf-watermark .watermark-stamp {
+    position: absolute;
+    font-family: "Space Grotesk", "Noto Sans SC", "IBM Plex Sans", sans-serif;
+    font-size: 38pt;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    color: rgba(170, 34, 34, 0.1);
+    text-transform: uppercase;
+    transform: rotate(-28deg);
+    transform-origin: center;
+    white-space: nowrap;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body.pdf-watermark .watermark-top-left {
+    top: 16%;
+    left: 5%;
+  }
+
+  body.pdf-watermark .watermark-center {
+    top: 45%;
+    left: 18%;
+  }
+
+  body.pdf-watermark .watermark-bottom-right {
+    top: 74%;
+    left: 30%;
+  }
+
   html,
   body {
     background: #ffffff;
