@@ -398,8 +398,7 @@ const bundles: Record<Locale, LocaleBundle> = {
       phone: "电话",
       location: "地点",
       website: "网站",
-      github: "GitHub"
-      ,
+      github: "GitHub",
       zhihu: "知乎"
     },
     coreSkillLabel: "核心",

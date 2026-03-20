@@ -36,6 +36,8 @@ jobs:
           sudo apt-get install -y fonts-noto-cjk
 
       - name: Build site and PDFs
+        env:
+          PDF_WATERMARK_TEXT: preview
         run: npm run build
 
       - name: Verify generated PDFs

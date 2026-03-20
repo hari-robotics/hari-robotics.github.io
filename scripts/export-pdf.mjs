@@ -160,6 +160,19 @@ async function waitForPageLoad(client) {
       return;
     }
 
+    try {
+      const state = await client.send("Runtime.evaluate", {
+        expression: "document.readyState",
+        returnByValue: true
+      });
+
+      if (state.result?.value === "complete") {
+        return;
+      }
+    } catch {
+      // Ignore transient evaluation failures while the page is still initializing.
+    }
+
     await sleep(100);
   }
 
@@ -168,7 +181,15 @@ async function waitForPageLoad(client) {
 
 async function exportPdf(locale, outputName) {
   const outputPath = path.join(projectRoot, outputName);
-  const entryUrl = `${entryFileUrl}?lang=${locale}&print=1&watermark=preview`;
+  const params = new URLSearchParams({
+    lang: locale,
+    print: "1"
+  });
+  const watermarkText = process.env.PDF_WATERMARK_TEXT?.trim();
+  if (watermarkText) {
+    params.set("watermark", watermarkText);
+  }
+  const entryUrl = `${entryFileUrl}?${params.toString()}`;
 
   mkdirSync(path.dirname(outputPath), { recursive: true });
 
